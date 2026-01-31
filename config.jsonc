@@ -9,6 +9,7 @@
     // Choose the order of the modules
     "modules-left": [
 //	"ext/workspaces",
+       "custom/launcher",
         "hyprland/workspaces",
 	"wlr/taskbar"
     //    "sway/mode",
@@ -38,6 +39,7 @@
         "tray",
 //	"clock",
   //      "tray",
+        "custom/notification",
         "custom/power"
     ],
     // Modules configuration
@@ -128,10 +130,11 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 21,
         "spacing": 10,
+	"show-passive-items": true
         // "icons": {
-        "blueman": "bluetooth",
+        // "blueman": "bluetooth",
         //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         // }
     },
@@ -192,7 +195,10 @@
     "wireplumber": {
 	"format": "{volume}%",
 	"format-muted": "",
-       "on-click": "helvum"	
+	"on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && ~/scripts/volume-notify.sh",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/scripts/volume-notify.sh",
+        "scroll-step": 5,
+        "on-click": "pwvucontrol"	
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -249,11 +255,40 @@
 //			"hibernate": "systemctl hibernate"
 		}
     },
-    "custom/weather": {
-    "format": "{}",
+"custom/weather": {
+    "format": "{}°",
     "tooltip": true,
     "interval": 3600,
-    "exec": "~/scripts/waybar-wttr.py",
+    "exec": "wttrbar --location 'Pateros'",
     "return-type": "json"
-   }
+},
+   
+     "custom/notification": {
+    "tooltip": true,
+    "format": "<span size='10pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  
+   "custom/launcher": {
+    "format": " 󱗼 ",
+    "on-click": "nwg-drawer",
+    "on-click-right": "killall nwg-drawer",
+    "tooltip": false
+}
+
 }
