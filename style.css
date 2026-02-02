@@ -1,3 +1,5 @@
+/* The latest style.css for waybar */
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
@@ -91,6 +93,10 @@ button:hover {
 #pulseaudio,
 #wireplumber,
 #custom-media,
+#custom-weather,
+#custom-power,
+#custom-notification,
+#custom-screenrecorder,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -250,6 +256,7 @@ label:focus {
 }
 
 #tray {
+/*	margin-right: 15px; */ /* Adjust number as needed */
 /*    background-color: #2980b9; */
       background-color: transparent;
 /*      color: #00ff99; */
@@ -342,4 +349,23 @@ label:focus {
 
 #privacy-item.audio-out {
     background-color: #0069d4;
+}
+
+#custom-weather {
+    font-family: "Noto Emoji", sans-serif;
+    /* Add other styling like color, font-size, etc. */
+    color: #ffffff; /* Emojis will inherit this color */
+    font-size: 14px;
+}
+
+#custom-power {
+	font-size: 20px;
+}
+
+#custom-notification {
+	margin-right: 5px; /* Adjust number as needed */
+}
+
+#custom-screenrecorder {
+	font-size: 20px;
 }
